@@ -72,6 +72,7 @@ rotate_backups () {
     log "rotating backups, keeping newest $keep"
 
     #list backup newest first , skip the first KEEP, delete the rest
+    # shellcheck disable=SC2012
     ls -1t "$dest"/"$folder_name"-*.tar.gz 2>/dev/null | tail -n +$((keep+1)) | while IFS= read -r old; do
         log "removing old backup: $(basename "$old")"
         rm -- "$old"
